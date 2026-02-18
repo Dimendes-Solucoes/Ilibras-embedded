@@ -35,9 +35,13 @@ Widget embarcável similar ao WhatsApp para captura de dados (Nome e CPF) com in
 <link rel="stylesheet" href="ilibras-widget.css">
 <script src="ilibras-widget.js"></script>
 <script>
-  new ILibrasWidget();
+  new ILibrasWidget({
+    token: 'SEU_TOKEN_AQUI'
+  });
 </script>
 ```
+
+> ⚠️ **IMPORTANTE:** Substitua `SEU_TOKEN_AQUI` pelo token fornecido pela equipe iLibras.
 
 ### Opção 2: Via CDN (quando disponível)
 
@@ -45,7 +49,9 @@ Widget embarcável similar ao WhatsApp para captura de dados (Nome e CPF) com in
 <link rel="stylesheet" href="https://cdn.example.com/ilibras-widget.css">
 <script src="https://cdn.example.com/ilibras-widget.js"></script>
 <script>
-  new ILibrasWidget();
+  new ILibrasWidget({
+    token: 'SEU_TOKEN_AQUI'
+  });
 </script>
 ```
 
@@ -54,21 +60,25 @@ Widget embarcável similar ao WhatsApp para captura de dados (Nome e CPF) com in
 ### Configuração Básica
 
 ```javascript
-// Widget com configuração padrão (canto inferior direito)
-new ILibrasWidget();
+new ILibrasWidget({
+  token: 'SEU_TOKEN_AQUI'
+});
 ```
+
+> ⚠️ O parâmetro `token` é **obrigatório**. Entre em contato com a equipe iLibras para obter seu token.
 
 ### Configuração Personalizada
 
 ```javascript
 new ILibrasWidget({
-  position: 'bottom-right',           // Posição do widget
-  redirectUrl: 'https://teste.com.br', // URL de redirecionamento
-  primaryColor: '#4A90E2',             // Cor principal
-  title: 'iLibras',                    // Título do modal
-  message: 'Olá! Como podemos ajudar?', // Mensagem de boas-vindas
-  buttonText: 'Iniciar atendimento',   // Texto do botão
-  zIndex: 9999                         // Z-index do widget
+  position: 'bottom-right',
+  redirectUrl: 'https://teste.com.br',
+  primaryColor: '#4A90E2',
+  title: 'iLibras',
+  message: 'Olá! Como podemos ajudar?',
+  buttonText: 'Iniciar atendimento',
+  token: 'SEU_TOKEN_AQUI',
+  zIndex: 9999
 });
 ```
 
@@ -81,8 +91,7 @@ new ILibrasWidget({
 | `primaryColor` | `string` | `'#4A90E2'` | Cor principal do widget (hex) |
 | `title` | `string` | `'iLibras'` | Título exibido no cabeçalho |
 | `message` | `string` | `'Olá, somos a equipe...'` | Mensagem de boas-vindas |
-| `buttonText` | `string` | `'Iniciar atendimento'` | Texto do botão de envio |
-| `zIndex` | `number` | `9999` | Z-index do widget |
+| `buttonText` | `string` | `'Iniciar atendimento'` | Texto do botão de envio || `token` | `string` | `null` | **OBRIGATÓRIO** - Token de autenticação da API || `zIndex` | `number` | `9999` | Z-index do widget |
 
 ## 📊 Integração com API
 
@@ -99,17 +108,21 @@ Content-Type: application/json
 
 ```json
 {
-  "cpf": "12345678900",
+  "nome": "João Silva",
   "nome_usuario": "João Silva",
-  "nome": "João Silva"
+  "cpf": "12345678900",
+  "telefone": "11987654321",
+  "token": "seu_token_de_autenticacao"
 }
 ```
 
 | Campo | Descrição | Formato |
-|-------|-----------|---------|
-| `cpf` | CPF sem formatação (apenas números) | String numérica (11 dígitos) |
+|-------|-----------|------|
+| `nome` | Nome completo do usuário | String |
 | `nome_usuario` | Nome de usuário (mesmo que o nome) | String |
-| `nome` | Nome do usuário | String |
+| `cpf` | CPF sem formatação (apenas números) | String numérica (11 dígitos) |
+| `telefone` | Telefone sem formatação (apenas números) | String numérica (10-11 dígitos) |
+| `token` | Token de autenticação fornecido pela equipe | String |
 
 ### Resposta Esperada da API
 

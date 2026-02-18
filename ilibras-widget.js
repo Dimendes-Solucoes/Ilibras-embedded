@@ -7,7 +7,8 @@
     primaryColor: '#4A90E2',
     title: 'iLibras',
     message: 'Olá, somos a equipe iLibras e estamos aqui para ajudar você! 😊',
-    buttonText: 'Iniciar atendimento',
+    buttonText: 'Iniciar atendimento em Libras',
+    token: null,
     zIndex: 9999
   };
 
@@ -108,6 +109,19 @@
               </div>
 
               <div class="ilibras-widget-form-group">
+                <label for="ilibras-phone">Telefone*</label>
+                <input 
+                  type="text" 
+                  id="ilibras-phone" 
+                  name="phone" 
+                  placeholder="(00) 00000-0000" 
+                  required
+                  maxlength="15"
+                  autocomplete="tel"
+                />
+              </div>
+
+              <div class="ilibras-widget-form-group">
                 <label for="ilibras-consent" class="ilibras-widget-checkbox-label">
                   <input 
                     type="checkbox" 
@@ -115,7 +129,7 @@
                     name="consent" 
                     required
                   />
-                  <span>Aceito receber contato comercial</span>
+                  <span>Aceito ser redirecionado para atendimento em Libras</span>
                 </label>
               </div>
 
@@ -156,6 +170,7 @@
 
     setupInputMasks() {
       const cpfInput = document.getElementById('ilibras-cpf');
+      const phoneInput = document.getElementById('ilibras-phone');
 
       cpfInput.addEventListener('input', (e) => {
         let value = e.target.value.replace(/\D/g, '');
@@ -164,6 +179,21 @@
         value = value.replace(/(\d{3})(\d)/, '$1.$2');
         value = value.replace(/(\d{3})(\d)/, '$1.$2');
         value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        
+        e.target.value = value;
+      });
+
+      phoneInput.addEventListener('input', (e) => {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 11) value = value.slice(0, 11);
+        
+        if (value.length <= 10) {
+          value = value.replace(/(\d{2})(\d)/, '($1) $2');
+          value = value.replace(/(\d{4})(\d)/, '$1-$2');
+        } else {
+          value = value.replace(/(\d{2})(\d)/, '($1) $2');
+          value = value.replace(/(\d{5})(\d)/, '$1-$2');
+        }
         
         e.target.value = value;
       });
@@ -202,9 +232,15 @@
     async handleSubmit(e) {
       e.preventDefault();
 
+      if (!this.config.token) {
+        alert('Erro: Token de autenticação não configurado. Entre em contato com o administrador do site.');
+        return;
+      }
+
       const formData = new FormData(e.target);
       const nome = formData.get('name').trim();
       const cpf = formData.get('cpf').replace(/\D/g, '');
+      const telefone = formData.get('phone').replace(/\D/g, '');
       const consentimento = formData.get('consent') === 'on';
 
       if (!this.validateCPF(cpf)) {
@@ -214,6 +250,11 @@
 
       if (nome.length < 3) {
         alert('Por favor, digite seu nome.');
+        return;
+      }
+
+      if (telefone.length < 10 || telefone.length > 11) {
+        alert('Telefone inválido. Por favor, verifique o número digitado.');
         return;
       }
 
@@ -234,9 +275,10 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            nome: nome,
             cpf: cpf,
-            nome_usuario: nome,
-            nome: nome
+            telefone: telefone,
+            token: this.config.token
           })
         });
 
