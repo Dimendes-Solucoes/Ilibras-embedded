@@ -1,1 +1,495 @@
-# Ilibras-embedded
+# 🎯 iLibras Widget - Widget de Atendimento Embarcável
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![CSS3](https://img.shields.io/badge/CSS-3-blue.svg)](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
+Widget embarcável similar ao WhatsApp para captura de dados (Nome e CPF) com integração via API. Envia dados de forma segura via POST e redireciona para plataforma de atendimento. Ideal para integração em sites, sistemas e plataformas web.
+
+![iLibras Widget](https://via.placeholder.com/800x400/25D366/FFFFFF?text=iLibras+Widget)
+
+## ✨ Características
+
+- 🚀 **Fácil integração** - Apenas 2 linhas de código
+- 🎨 **Totalmente personalizável** - Cores, posição, textos e mais
+- 📱 **Responsivo** - Funciona perfeitamente em desktop e mobile
+- ✅ **Validação automática** - CPF validado antes do envio
+- 🔒 **Envio seguro** - Dados enviados via POST para API
+- 🎭 **Máscaras de entrada** - Formatação automática de CPF
+- 🌐 **Universal** - Funciona em qualquer site ou sistema
+- ♿ **Acessível** - Suporte a leitores de tela e navegação por teclado
+- 🌙 **Tema escuro** - Adapta-se automaticamente às preferências do usuário
+
+## 📦 Instalação
+
+### Opção 1: Instalação Manual
+
+1. Baixe os arquivos:
+   - `ilibras-widget.js`
+   - `ilibras-widget.css`
+
+2. Adicione ao seu HTML antes de `</body>`:
+
+```html
+<!-- iLibras Widget -->
+<link rel="stylesheet" href="ilibras-widget.css">
+<script src="ilibras-widget.js"></script>
+<script>
+  new ILibrasWidget();
+</script>
+```
+
+### Opção 2: Via CDN (quando disponível)
+
+```html
+<link rel="stylesheet" href="https://cdn.example.com/ilibras-widget.css">
+<script src="https://cdn.example.com/ilibras-widget.js"></script>
+<script>
+  new ILibrasWidget();
+</script>
+```
+
+## 🚀 Uso Rápido
+
+### Configuração Básica
+
+```javascript
+// Widget com configuração padrão (canto inferior direito)
+new ILibrasWidget();
+```
+
+### Configuração Personalizada
+
+```javascript
+new ILibrasWidget({
+  position: 'bottom-right',           // Posição do widget
+  redirectUrl: 'https://teste.com.br', // URL de redirecionamento
+  primaryColor: '#4A90E2',             // Cor principal
+  title: 'iLibras',                    // Título do modal
+  message: 'Olá! Como podemos ajudar?', // Mensagem de boas-vindas
+  buttonText: 'Iniciar atendimento',   // Texto do botão
+  zIndex: 9999                         // Z-index do widget
+});
+```
+
+## ⚙️ Opções de Configuração
+
+| Opção | Tipo | Padrão | Descrição |
+|-------|------|--------|-----------|
+| `position` | `string` | `'bottom-right'` | Posição do widget: `'bottom-right'`, `'bottom-left'`, `'top-right'`, `'top-left'` |
+| `redirectUrl` | `string` | `'https://teste.com.br'` | URL para redirecionamento após envio |
+| `primaryColor` | `string` | `'#4A90E2'` | Cor principal do widget (hex) |
+| `title` | `string` | `'iLibras'` | Título exibido no cabeçalho |
+| `message` | `string` | `'Olá, somos a equipe...'` | Mensagem de boas-vindas |
+| `buttonText` | `string` | `'Iniciar atendimento'` | Texto do botão de envio |
+| `zIndex` | `number` | `9999` | Z-index do widget |
+
+## 📊 Integração com API
+
+Quando o usuário submete o formulário, os dados são enviados via **POST** (método seguro) para a API configurada:
+
+### Endpoint da API
+
+```
+POST https://sistema.ilibras.com.br/administrativo/api/clientes/cadastrar.php
+Content-Type: application/json
+```
+
+### Dados Enviados
+
+```json
+{
+  "cpf": "12345678900",
+  "nome_usuario": "João Silva",
+  "nome": "João Silva"
+}
+```
+
+| Campo | Descrição | Formato |
+|-------|-----------|---------|
+| `cpf` | CPF sem formatação (apenas números) | String numérica (11 dígitos) |
+| `nome_usuario` | Nome de usuário (mesmo que o nome) | String |
+| `nome` | Nome do usuário | String |
+
+### Resposta Esperada da API
+
+A API deve retornar um JSON com um link de redirecionamento:
+
+```json
+{
+  "link": "https://ilibras.com/atendimento/12345",
+  "success": true,
+  "message": "Cliente cadastrado com sucesso"
+}
+```
+
+Campos aceitos para redirecionamento (em ordem de prioridade):
+- `link`
+- `url`
+- `redirect`
+
+Após receber a resposta, o widget automaticamente redireciona o usuário para o link fornecido pela API.
+
+## 🎯 Exemplos de Uso
+
+### Exemplo 1: Widget Simples
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meu Site</title>
+</head>
+<body>
+  <h1>Bem-vindo!</h1>
+  
+  <!-- Widget -->
+  <link rel="stylesheet" href="ilibras-widget.css">
+  <script src="ilibras-widget.js"></script>
+  <script>
+    new ILibrasWidget();
+  </script>
+</body>
+</html>
+```
+
+### Exemplo 2: Posição Personalizada
+
+```javascript
+// Widget no canto inferior esquerdo
+new ILibrasWidget({
+  position: 'bottom-left'
+});
+```
+
+### Exemplo 3: Customização Completa
+
+```javascript
+new ILibrasWidget({
+  position: 'bottom-right',
+  redirectUrl: 'https://minhaplataforma.com.br/atendimento',
+  primaryColor: '#0066CC',
+  title: 'Suporte Premium',
+  message: 'Nossa equipe está pronta para atender você! Preencha os dados abaixo.',
+  buttonText: 'Solicitar Atendimento',
+  zIndex: 10000
+});
+```
+
+### Exemplo 4: Auto-inicialização Global
+
+```html
+<!-- Defina a configuração antes de carregar o script -->
+<script>
+  window.iLibrasWidgetConfig = {
+    position: 'bottom-right',
+    redirectUrl: 'https://teste.com.br',
+    primaryColor: '#FF5722'
+  };
+</script>
+<script src="ilibras-widget.js"></script>
+<!-- Widget será inicializado automaticamente -->
+```
+
+### Exemplo 5: Controle Programático
+
+```javascript
+// Guarde a instância
+const widget = new ILibrasWidget();
+
+// Abrir widget programaticamente
+widget.openWidget();
+
+// Fechar widget
+widget.closeWidget();
+
+// Alternar (abrir/fechar)
+widget.toggleWidget();
+
+// Remover widget da página
+widget.destroy();
+```
+
+## 🎨 Personalização Avançada
+
+### Alterar Estilos via CSS
+
+Você pode sobrescrever os estilos padrão:
+
+```css
+/* Customizar botão flutuante */
+.ilibras-widget-button {
+  width: 70px !important;
+  height: 70px !important;
+}
+
+/* Customizar modal */
+.ilibras-widget-modal {
+  border-radius: 20px !important;
+}
+
+/* Customizar inputs */
+.ilibras-widget-form-group input {
+  border-radius: 12px !important;
+}
+```
+
+## 🔧 API JavaScript
+
+### Métodos Públicos
+
+```javascript
+const widget = new ILibrasWidget(config);
+
+// Abrir o widget
+widget.openWidget();
+
+// Fechar o widget
+widget.closeWidget();
+
+// Alternar estado (abrir/fechar)
+widget.toggleWidget();
+
+// Destruir o widget e remover do DOM
+widget.destroy();
+```
+
+### Propriedades
+
+```javascript
+// Verificar se o widget está aberto
+console.log(widget.isOpen); // true ou false
+
+// Acessar configuração
+console.log(widget.config);
+```
+
+## 🌐 Compatibilidade
+
+### Navegadores Suportados
+
+- ✅ Chrome 90+
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Edge 90+
+- ✅ Opera 76+
+- ✅ Mobile Browsers (iOS Safari, Chrome Mobile)
+
+### Frameworks e CMS
+
+O widget funciona com:
+
+- ✅ HTML estático
+- ✅ WordPress
+- ✅ Joomla
+- ✅ Drupal
+- ✅ React
+- ✅ Vue.js
+- ✅ Angular
+- ✅ Next.js
+- ✅ Qualquer framework JavaScript
+
+## 📱 Responsividade
+
+O widget se adapta automaticamente a diferentes tamanhos de tela:
+
+- Desktop: Modal de 380px de largura
+- Tablet: Modal responsivo com margens
+- Mobile: Modal em tela cheia com otimizações
+
+## 🔒 Segurança e Validação
+
+### Envio Seguro via POST
+
+Todos os dados são enviados via **método POST** (não via URL/GET), garantindo:
+- Dados não ficam expostos na URL
+- Maior segurança no tráfego de informações sensíveis
+- Conformidade com boas práticas de desenvolvimento web
+
+### Validação de CPF
+
+O widget valida o CPF antes do envio usando o algoritmo de verificação de dígitos. CPFs inválidos são rejeitados automaticamente.
+
+```javascript
+// CPFs aceitos: números válidos com 11 dígitos
+// CPFs rejeitados: 
+// - Números com menos de 11 dígitos
+// - Sequências repetidas (111.111.111-11)
+// - Dígitos verificadores incorretos
+```
+
+### Validação de Nome
+
+- Requer no mínimo 3 caracteres
+- Remove espaços extras
+- Mesmo valor usado para `nome` e `nome_usuario`
+
+### Sanitização de Dados
+
+Todos os dados são sanitizados antes do envio:
+- CPF: apenas números
+- Nome: trimmed (espaços removidos das extremidades)
+
+## 🎓 Exemplos Práticos
+
+### WordPress
+
+```php
+<?php
+// Adicione ao footer.php ou use wp_footer hook
+function adicionar_ilibras_widget() {
+    ?>
+    <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/ilibras-widget.css">
+    <script src="<?php echo get_template_directory_uri(); ?>/ilibras-widget.js"></script>
+    <script>
+      new ILibrasWidget({
+        redirectUrl: 'https://meusite.com.br/atendimento'
+      });
+    </script>
+    <?php
+}
+add_action('wp_footer', 'adicionar_ilibras_widget');
+?>
+```
+
+### React
+
+```jsx
+import { useEffect } from 'react';
+
+function App() {
+  useEffect(() => {
+    // Carregar CSS
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/ilibras-widget.css';
+    document.head.appendChild(link);
+
+    // Carregar JS
+    const script = document.createElement('script');
+    script.src = '/ilibras-widget.js';
+    script.onload = () => {
+      new window.ILibrasWidget({
+        position: 'bottom-right'
+      });
+    };
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup
+      if (window.iLibrasWidgetInstance) {
+        window.iLibrasWidgetInstance.destroy();
+      }
+    };
+  }, []);
+
+  return <div className="App">Meu App</div>;
+}
+```
+
+### Vue.js
+
+```vue
+<template>
+  <div id="app">
+    <h1>Meu App Vue</h1>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  mounted() {
+    // Carregar widget
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '/ilibras-widget.css';
+    document.head.appendChild(link);
+
+    const script = document.createElement('script');
+    script.src = '/ilibras-widget.js';
+    script.onload = () => {
+      new window.ILibrasWidget({
+        position: 'bottom-right',
+        redirectUrl: 'https://teste.com.br'
+      });
+    };
+    document.body.appendChild(script);
+  },
+  beforeUnmount() {
+    if (window.iLibrasWidgetInstance) {
+      window.iLibrasWidgetInstance.destroy();
+    }
+  }
+}
+</script>
+```
+
+## 📄 Estrutura de Arquivos
+
+```
+Ilibras-embedded/
+├── ilibras-widget.js      # Script principal do widget
+├── ilibras-widget.css     # Estilos do widget
+├── exemplo.html           # Página de exemplo e demonstração
+└── README.md              # Esta documentação
+```
+
+## 🐛 Solução de Problemas
+
+### Widget não aparece
+
+1. Verifique se ambos os arquivos (CSS e JS) foram carregados
+2. Verifique o console do navegador para erros
+3. Certifique-se de que os caminhos dos arquivos estão corretos
+
+### Estilos não aplicados
+
+1. Verifique se o CSS foi carregado antes do JS
+2. Verifique conflitos com outros estilos da página
+3. Use `!important` se necessário para sobrescrever estilos
+
+### Redirecionamento não funciona
+
+1. Verifique se a `redirectUrl` está correta
+2. Certifique-se de que o formulário foi preenchido corretamente
+3. Verifique se o CPF é válido
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Para contribuir:
+
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/NovaFeature`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova feature'`)
+4. Push para a branch (`git push origin feature/NovaFeature`)
+5. Abra um Pull Request
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 👥 Autor
+
+**iLibras Team**
+
+## 📧 Suporte
+
+Para suporte, envie um email para suporte@ilibras.com.br ou abra uma issue no GitHub.
+
+## 🔄 Changelog
+
+### v1.0.0 - 2026-02-18
+- ✨ Versão inicial
+- 🎨 Widget flutuante com design responsivo
+- ✅ Validação de CPF
+- 📱 Suporte mobile
+- 🎯 Máscara de entrada para CPF
+- 🌐 Múltiplas opções de posicionamento
+- 🎨 Personalização de cores e textos
+- 🔒 Envio seguro via POST para API
+- 📡 Integração com API iLibras (cadastrar_cliente.php)
+- 🔄 Redirecionamento automático baseado na resposta da API
+
+
+Feito com ❤️ pela equipe iLibras

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iLibras Widget - Temas e Cores</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .theme-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 3px solid transparent;
+    }
+
+    .theme-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+    }
+
+    .theme-card.active {
+      border-color: #4A90E2;
+    }
+
+    .theme-preview {
+      height: 60px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .theme-info h3 {
+      color: #2c3e50;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .theme-info p {
+      color: #6c757d;
+      font-size: 14px;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .color-code {
+      background: #f8f9fa;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 12px;
+      color: #495057;
+      display: inline-block;
+    }
+
+    .current-config {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .current-config h2 {
+      color: #2c3e50;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    .code-block {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #3498db;
+    }
+
+    .string {
+      color: #2ecc71;
+    }
+
+    .comment {
+      color: #95a5a6;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 28px;
+      }
+
+      .themes-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🎨 Temas e Personalizações</h1>
+      <p>Clique em um tema para ver o widget com essa configuração</p>
+    </div>
+
+    <div class="themes-grid">
+      <!-- Tema WhatsApp -->
+      <div class="theme-card" data-theme="whatsapp">
+        <div class="theme-preview" style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);">
+          WhatsApp
+        </div>
+        <div class="theme-info">
+          <h3>WhatsApp Verde</h3>
+          <p>Estilo clássico do WhatsApp com verde característico</p>
+          <span class="color-code">#25D366</span>
+        </div>
+      </div>
+
+      <!-- Tema Azul Profissional (Padrão iLibras) -->
+      <div class="theme-card active" data-theme="professional">
+        <div class="theme-preview" style="background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);">
+          Profissional
+        </div>
+        <div class="theme-info">
+          <h3>Azul Profissional (Padrão)</h3>
+          <p>Ideal para empresas corporativas e serviços B2B</p>
+          <span class="color-code">#4A90E2</span>
+        </div>
+      </div>
+
+      <!-- Tema Laranja Vibrante -->
+      <div class="theme-card" data-theme="vibrant">
+        <div class="theme-preview" style="background: linear-gradient(135deg, #FF6B35 0%, #F44336 100%);">
+          Vibrante
+        </div>
+        <div class="theme-info">
+          <h3>Laranja Vibrante</h3>
+          <p>Chamativo e energético, ótimo para conversões</p>
+          <span class="color-code">#FF6B35</span>
+        </div>
+      </div>
+
+      <!-- Tema Roxo Moderno -->
+      <div class="theme-card" data-theme="modern">
+        <div class="theme-preview" style="background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);">
+          Moderno
+        </div>
+        <div class="theme-info">
+          <h3>Roxo Moderno</h3>
+          <p>Design contemporâneo e sofisticado</p>
+          <span class="color-code">#9C27B0</span>
+        </div>
+      </div>
+
+      <!-- Tema Verde Escuro -->
+      <div class="theme-card" data-theme="forest">
+        <div class="theme-preview" style="background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);">
+          Floresta
+        </div>
+        <div class="theme-info">
+          <h3>Verde Floresta</h3>
+          <p>Natural e confiável, perfeito para saúde e bem-estar</p>
+          <span class="color-code">#2E7D32</span>
+        </div>
+      </div>
+
+      <!-- Tema Vermelho -->
+      <div class="theme-card" data-theme="urgent">
+        <div class="theme-preview" style="background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);">
+          Urgente
+        </div>
+        <div class="theme-info">
+          <h3>Rosa Urgente</h3>
+          <p>Chamativo para suporte urgente e emergências</p>
+          <span class="color-code">#E91E63</span>
+        </div>
+      </div>
+
+      <!-- Tema Ciano -->
+      <div class="theme-card" data-theme="tech">
+        <div class="theme-preview" style="background: linear-gradient(135deg, #00BCD4 0%, #0097A7 100%);">
+          Tech
+        </div>
+        <div class="theme-info">
+          <h3>Ciano Tech</h3>
+          <p>Tecnológico e inovador, ideal para startups</p>
+          <span class="color-code">#00BCD4</span>
+        </div>
+      </div>
+
+      <!-- Tema Dourado -->
+      <div class="theme-card" data-theme="premium">
+        <div class="theme-preview" style="background: linear-gradient(135deg, #FFA726 0%, #FF9800 100%);">
+          Premium
+        </div>
+        <div class="theme-info">
+          <h3>Dourado Premium</h3>
+          <p>Elegante e exclusivo para serviços premium</p>
+          <span class="color-code">#FFA726</span>
+        </div>
+      </div>
+
+      <!-- Tema Escuro -->
+      <div class="theme-card" data-theme="dark">
+        <div class="theme-preview" style="background: linear-gradient(135deg, #424242 0%, #212121 100%);">
+          Escuro
+        </div>
+        <div class="theme-info">
+          <h3>Cinza Escuro</h3>
+          <p>Minimalista e elegante, estilo dark mode</p>
+          <span class="color-code">#424242</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="current-config">
+      <h2>📝 Código Atual</h2>
+      <div class="code-block">
+<code id="current-code"><span class="comment">// Configuração atual do widget</span>
+<span class="highlight">new</span> ILibrasWidget({
+  <span class="highlight">position:</span> <span class="string">'bottom-right'</span>,
+  <span class="highlight">primaryColor:</span> <span class="string">'#4A90E2'</span>,
+  <span class="highlight">title:</span> <span class="string">'iLibras'</span>,
+  <span class="highlight">message:</span> <span class="string">'Olá! Como podemos ajudar você?'</span>,
+  <span class="highlight">buttonText:</span> <span class="string">'Iniciar atendimento'</span>,
+  <span class="highlight">redirectUrl:</span> <span class="string">'https://teste.com.br'</span>
+});</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- iLibras Widget -->
+  <link rel="stylesheet" href="ilibras-widget.css">
+  <script src="ilibras-widget.js"></script>
+  <script>
+    let currentWidget = null;
+
+    const themes = {
+      whatsapp: {
+        color: '#25D366',
+        title: 'iLibras',
+        message: 'Olá, somos a equipe iLibras! Como podemos ajudar você? 😊'
+      },
+      professional: {
+        color: '#4A90E2',
+        title: 'Atendimento Profissional',
+        message: 'Bem-vindo! Nossa equipe está pronta para atendê-lo.'
+      },
+      vibrant: {
+        color: '#FF6B35',
+        title: 'Suporte Online',
+        message: 'Oi! Precisa de ajuda? Estamos aqui para você! 🚀'
+      },
+      modern: {
+        color: '#9C27B0',
+        title: 'Assistência Digital',
+        message: 'Olá! Vamos resolver isso juntos. Digite seus dados abaixo.'
+      },
+      forest: {
+        color: '#2E7D32',
+        title: 'Atendimento Verde',
+        message: 'Seja bem-vindo! Como podemos auxiliá-lo hoje? 🌿'
+      },
+      urgent: {
+        color: '#E91E63',
+        title: 'Suporte Urgente',
+        message: 'Atendimento prioritário disponível! Informe seus dados.'
+      },
+      tech: {
+        color: '#00BCD4',
+        title: 'Tech Support',
+        message: 'Hey! Nossa equipe tech está online. Como podemos ajudar? 💻'
+      },
+      premium: {
+        color: '#FFA726',
+        title: 'Atendimento VIP',
+        message: 'Bem-vindo ao atendimento premium! Será um prazer ajudá-lo. ⭐'
+      },
+      dark: {
+        color: '#424242',
+        title: 'Atendimento 24/7',
+        message: 'Olá! Estamos disponíveis a qualquer hora. Como podemos ajudar?'
+      }
+    };
+
+    function initWidget(themeName) {
+      const theme = themes[themeName];
+      
+      // Destroi widget existente
+      if (currentWidget) {
+        currentWidget.destroy();
+      }
+
+      // Cria novo widget
+      currentWidget = new ILibrasWidget({
+        position: 'bottom-right',
+        primaryColor: theme.color,
+        title: theme.title,
+        message: theme.message,
+        buttonText: 'Iniciar atendimento',
+        redirectUrl: 'https://teste.com.br'
+      });
+
+      updateUI(themeName, theme);
+    }
+
+    function updateUI(themeName, theme) {
+      // Atualiza cards
+      document.querySelectorAll('.theme-card').forEach(card => {
+        card.classList.remove('active');
+      });
+      document.querySelector(`[data-theme="${themeName}"]`).classList.add('active');
+
+      // Atualiza código
+      const code = `<span class="comment">// Configuração atual do widget</span>
+<span class="highlight">new</span> ILibrasWidget({
+  <span class="highlight">position:</span> <span class="string">'bottom-right'</span>,
+  <span class="highlight">primaryColor:</span> <span class="string">'${theme.color}'</span>,
+  <span class="highlight">title:</span> <span class="string">'${theme.title}'</span>,
+  <span class="highlight">message:</span> <span class="string">'${theme.message}'</span>,
+  <span class="highlight">buttonText:</span> <span class="string">'Iniciar atendimento'</span>,
+  <span class="highlight">redirectUrl:</span> <span class="string">'https://teste.com.br'</span>
+});`;
+      
+      document.getElementById('current-code').innerHTML = code;
+    }
+
+    // Event listeners nos cards
+    document.querySelectorAll('.theme-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const theme = this.dataset.theme;
+        initWidget(theme);
+      });
+    });
+
+    // Inicializa com tema padrão
+    initWidget('professional');
+  </script>
+</body>
+</html>

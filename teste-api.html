@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste API - iLibras Widget</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 800px;
+      width: 100%;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+
+    .subtitle {
+      color: #7f8c8d;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .info-box {
+      background: #e3f2fd;
+      border-left: 4px solid #4A90E2;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .info-box h3 {
+      color: #1976d2;
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+
+    .info-box p {
+      color: #424242;
+      line-height: 1.6;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .info-box code {
+      background: #fff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
+      color: #d32f2f;
+    }
+
+    .alert {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .alert strong {
+      color: #856404;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .alert p {
+      color: #856404;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .success {
+      background: #d4edda;
+      border-left: 4px solid #28a745;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+
+    .success strong {
+      color: #155724;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .success p {
+      color: #155724;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .code-block {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 16px;
+    }
+
+    .highlight {
+      color: #3498db;
+    }
+
+    .string {
+      color: #2ecc71;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧪 Teste de Integração API</h1>
+    <p class="subtitle">Teste do widget com envio via POST</p>
+
+    <div class="info-box">
+      <h3>📡 Endpoint da API</h3>
+      <p>
+        <strong>URL:</strong> <code>https://sistema.ilibras.com.br/administrativo/api/clientes/cadastrar.php</code><br>
+        <strong>Método:</strong> <code>POST</code><br>
+        <strong>Content-Type:</strong> <code>application/json</code>
+      </p>
+    </div>
+
+    <div class="info-box">
+      <h3>📤 Dados Enviados</h3>
+      <div class="code-block">
+<code>{
+  <span class="highlight">"cpf"</span>: <span class="string">"12345678900"</span>,
+  <span class="highlight">"nome_usuario"</span>: <span class="string">"João Silva"</span>,
+  <span class="highlight">"nome"</span>: <span class="string">"João Silva"</span>
+}</code>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <h3>📥 Resposta Esperada</h3>
+      <div class="code-block">
+<code>{
+  <span class="highlight">"link"</span>: <span class="string">"https://ilibras.com/atendimento/12345"</span>,
+  <span class="highlight">"success"</span>: <span class="highlight">true</span>,
+  <span class="highlight">"message"</span>: <span class="string">"Cliente cadastrado com sucesso"</span>
+}</code>
+      </div>
+    </div>
+
+    <div class="alert">
+      <strong>⚠️ Importante</strong>
+      <p>
+        • O widget exibirá "Aguarde..." enquanto processa a requisição<br>
+        • Em caso de erro, uma mensagem será exibida e o botão será reabilitado<br>
+        • Após sucesso, o usuário será redirecionado automaticamente para o link retornado pela API<br>
+        • A API pode retornar <code>link</code>, <code>url</code> ou <code>redirect</code> - todos são aceitos
+      </p>
+    </div>
+
+    <div class="success">
+      <strong>🎯 Como Testar</strong>
+      <p>
+        1. Clique no botão azul flutuante no canto inferior direito<br>
+        2. Preencha o formulário com Nome e CPF válido<br>
+        3. Marque a checkbox de consentimento<br>
+        4. Clique em "Iniciar atendimento"<br>
+        5. Aguarde o processamento e redirecionamento
+      </p>
+    </div>
+  </div>
+
+  <!-- iLibras Widget -->
+  <link rel="stylesheet" href="ilibras-widget.css">
+  <script src="ilibras-widget.js"></script>
+  <script>
+    // Inicializa o widget com configuração para teste
+    new ILibrasWidget({
+      position: 'bottom-right',
+      title: 'iLibras API',
+      message: 'Preencha seus dados para teste de integração com a API!',
+      buttonText: 'Iniciar atendimento',
+      // redirectUrl é usado como fallback caso a API não retorne um link
+      redirectUrl: 'https://ilibras.com'
+    });
+  </script>
+</body>
+</html>

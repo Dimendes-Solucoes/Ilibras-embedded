@@ -1,0 +1,35 @@
+{
+  "name": "ilibras-widget",
+  "version": "1.0.0",
+  "description": "Widget embarcável para captura de dados e redirecionamento para plataforma de atendimento",
+  "main": "ilibras-widget.js",
+  "files": [
+    "ilibras-widget.js",
+    "ilibras-widget.css",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "widget",
+    "embedded",
+    "chat",
+    "atendimento",
+    "whatsapp",
+    "formulario",
+    "conversion",
+    "lead-capture"
+  ],
+  "author": "iLibras Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ilibras/ilibras-widget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ilibras/ilibras-widget/issues"
+  },
+  "homepage": "https://github.com/ilibras/ilibras-widget#readme"
+}

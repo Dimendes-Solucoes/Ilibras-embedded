@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iLibras Widget - Demonstrações</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .header h1 {
+      color: #2c3e50;
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .header .logo {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+
+    .header p {
+      color: #7f8c8d;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .version {
+      display: inline-block;
+      background: #25D366;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .demos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 30px;
+    }
+
+    .demo-card {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+
+    .demo-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+    }
+
+    .demo-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .demo-card h2 {
+      color: #2c3e50;
+      font-size: 22px;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .demo-card p {
+      color: #6c757d;
+      font-size: 14px;
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .demo-badge {
+      display: inline-block;
+      background: #e3f2fd;
+      color: #1976d2;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .demo-badge.recommended {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .resources {
+      background: white;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .resources h2 {
+      color: #2c3e50;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .resource-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .resource-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #2c3e50;
+      transition: all 0.2s;
+    }
+
+    .resource-link:hover {
+      background: #e9ecef;
+      transform: translateX(4px);
+    }
+
+    .resource-link .icon {
+      font-size: 24px;
+    }
+
+    .resource-link .text {
+      flex: 1;
+    }
+
+    .resource-link .title {
+      font-weight: 600;
+      font-size: 14px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .resource-link .desc {
+      font-size: 12px;
+      color: #6c757d;
+    }
+
+    .footer {
+      text-align: center;
+      color: white;
+      margin-top: 40px;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 28px;
+      }
+
+      .demos-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .resource-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">💬</div>
+      <h1>iLibras Widget</h1>
+      <p>
+        Widget embarcável para captura de dados e redirecionamento<br>
+        Similar ao WhatsApp, fácil de integrar em qualquer site
+      </p>
+      <span class="version">v1.0.0</span>
+    </div>
+
+    <div class="demos-grid">
+      <a href="exemplo.html" class="demo-card">
+        <div class="demo-icon">📚</div>
+        <h2>Documentação Completa</h2>
+        <p>
+          Guia completo com todos os exemplos de código, configurações 
+          e boas práticas de uso do widget.
+        </p>
+        <div style="text-align: center;">
+          <span class="demo-badge recommended">🌟 Recomendado</span>
+        </div>
+      </a>
+
+      <a href="teste-posicoes.html" class="demo-card">
+        <div class="demo-icon">🎯</div>
+        <h2>Teste de Posicionamento</h2>
+        <p>
+          Experimente o widget em diferentes posições da tela: 
+          superior, inferior, esquerda e direita.
+        </p>
+        <div style="text-align: center;">
+          <span class="demo-badge">Interativo</span>
+        </div>
+      </a>
+
+      <a href="teste-temas.html" class="demo-card">
+        <div class="demo-icon">🎨</div>
+        <h2>Temas e Cores</h2>
+        <p>
+          Explore 9 temas pré-definidos com diferentes paletas de 
+          cores para combinar com sua marca.
+        </p>
+        <div style="text-align: center;">
+          <span class="demo-badge">Personalização</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="resources">
+      <h2>📖 Recursos e Documentação</h2>
+      <div class="resource-links">
+        <a href="README.md" class="resource-link" download>
+          <span class="icon">📄</span>
+          <span class="text">
+            <span class="title">README.md</span>
+            <span class="desc">Documentação técnica completa</span>
+          </span>
+        </a>
+
+        <a href="INSTALACAO.md" class="resource-link" download>
+          <span class="icon">🚀</span>
+          <span class="text">
+            <span class="title">Guia de Instalação</span>
+            <span class="desc">Instalação em 3 passos</span>
+          </span>
+        </a>
+
+        <a href="ilibras-widget.js" class="resource-link" download>
+          <span class="icon">📦</span>
+          <span class="text">
+            <span class="title">ilibras-widget.js</span>
+            <span class="desc">Arquivo JavaScript (32KB)</span>
+          </span>
+        </a>
+
+        <a href="ilibras-widget.css" class="resource-link" download>
+          <span class="icon">🎨</span>
+          <span class="text">
+            <span class="title">ilibras-widget.css</span>
+            <span class="desc">Arquivo de estilos (8KB)</span>
+          </span>
+        </a>
+
+        <a href="LICENSE" class="resource-link" download>
+          <span class="icon">⚖️</span>
+          <span class="text">
+            <span class="title">Licença MIT</span>
+            <span class="desc">Uso livre e código aberto</span>
+          </span>
+        </a>
+
+        <a href="package.json" class="resource-link" download>
+          <span class="icon">📋</span>
+          <span class="text">
+            <span class="title">package.json</span>
+            <span class="desc">Metadados do pacote</span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>
+        Desenvolvido com ❤️ pela equipe iLibras<br>
+        <small>© 2026 - Todos os direitos reservados</small>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

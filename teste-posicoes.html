@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iLibras Widget - Teste de Posicionamento</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 600px;
+      width: 100%;
+      padding: 40px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    .subtitle {
+      color: #7f8c8d;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .position-btn {
+      padding: 16px 20px;
+      border: 2px solid #4A90E2;
+      background: white;
+      color: #4A90E2;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .position-btn:hover {
+      background: #4A90E2;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+    }
+
+    .position-btn.active {
+      background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+      color: white;
+      border-color: #357ABD;
+    }
+
+    .position-btn .check {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .position-btn.active .check {
+      display: flex;
+    }
+
+    .info-box {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .info-box h3 {
+      color: #2c3e50;
+      font-size: 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .info-box h3::before {
+      content: '💡';
+      font-size: 20px;
+    }
+
+    .info-box p {
+      color: #495057;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .code {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 12px;
+      text-align: left;
+      margin-top: 16px;
+      overflow-x: auto;
+    }
+
+    .code .highlight {
+      color: #3498db;
+    }
+
+    .code .string {
+      color: #2ecc71;
+    }
+
+    .reset-btn {
+      background: #6c757d;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: 12px;
+    }
+
+    .reset-btn:hover {
+      background: #5a6268;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .button-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Teste de Posicionamento</h1>
+    <p class="subtitle">Clique em uma posição para testar o widget</p>
+
+    <div class="button-grid">
+      <button class="position-btn" data-position="bottom-right">
+        <span class="check">✓</span>
+        📍 Inferior Direito
+        <div style="font-size: 11px; color: #6c757d; margin-top: 4px;">(Padrão)</div>
+      </button>
+      
+      <button class="position-btn" data-position="bottom-left">
+        <span class="check">✓</span>
+        📍 Inferior Esquerdo
+      </button>
+      
+      <button class="position-btn" data-position="top-right">
+        <span class="check">✓</span>
+        📍 Superior Direito
+      </button>
+      
+      <button class="position-btn" data-position="top-left">
+        <span class="check">✓</span>
+        📍 Superior Esquerdo
+      </button>
+    </div>
+
+    <div class="info-box">
+      <h3>Como usar</h3>
+      <p>
+        Clique em uma das posições acima para ver o widget naquela posição. 
+        O widget será recriado automaticamente com a nova configuração.
+      </p>
+    </div>
+
+    <div id="code-display">
+      <div class="code">
+<span class="comment">// Código atual:</span>
+<span class="highlight">new</span> ILibrasWidget({
+  <span class="highlight">position:</span> <span class="string" id="position-value">'bottom-right'</span>
+});
+      </div>
+    </div>
+
+    <button class="reset-btn" onclick="resetWidget()">
+      🔄 Resetar para Padrão
+    </button>
+  </div>
+
+  <!-- iLibras Widget -->
+  <link rel="stylesheet" href="ilibras-widget.css">
+  <script src="ilibras-widget.js"></script>
+  <script>
+    let currentWidget = null;
+    let currentPosition = 'bottom-right';
+
+    // Inicializa widget padrão
+    function initWidget(position = 'bottom-right') {
+      // Destroi widget existente
+      if (currentWidget) {
+        currentWidget.destroy();
+      }
+
+      // Cria novo widget
+      currentWidget = new ILibrasWidget({
+        position: position,
+        redirectUrl: 'https://teste.com.br',
+        title: 'iLibras',
+        message: `Widget posicionado em: ${getPositionName(position)}`
+      });
+
+      currentPosition = position;
+      updateUI(position);
+    }
+
+    function getPositionName(position) {
+      const names = {
+        'bottom-right': 'Inferior Direito',
+        'bottom-left': 'Inferior Esquerdo',
+        'top-right': 'Superior Direito',
+        'top-left': 'Superior Esquerdo'
+      };
+      return names[position] || position;
+    }
+
+    function updateUI(position) {
+      // Atualiza botões
+      document.querySelectorAll('.position-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector(`[data-position="${position}"]`).classList.add('active');
+
+      // Atualiza código
+      document.getElementById('position-value').textContent = `'${position}'`;
+    }
+
+    function resetWidget() {
+      initWidget('bottom-right');
+    }
+
+    // Event listeners nos botões
+    document.querySelectorAll('.position-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const position = this.dataset.position;
+        initWidget(position);
+      });
+    });
+
+    // Inicializa widget padrão ao carregar
+    initWidget('bottom-right');
+  </script>
+</body>
+</html>

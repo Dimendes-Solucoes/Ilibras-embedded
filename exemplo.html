@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iLibras Widget - Exemplo de Uso</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      max-width: 900px;
+      width: 100%;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+
+    .subtitle {
+      color: #7f8c8d;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .demo-section {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .demo-section h2 {
+      color: #2c3e50;
+      margin-bottom: 16px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .demo-section h2::before {
+      content: '→';
+      color: #4A90E2;
+      font-weight: bold;
+    }
+
+    .demo-section p {
+      color: #495057;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .code-block {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .code-block code {
+      display: block;
+      white-space: pre;
+    }
+
+    .highlight {
+      color: #3498db;
+    }
+
+    .string {
+      color: #2ecc71;
+    }
+
+    .comment {
+      color: #95a5a6;
+      font-style: italic;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(74, 144, 226, 0.4);
+    }
+
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #5a6268;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid #4A90E2;
+    }
+
+    .feature-card h3 {
+      color: #2c3e50;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .feature-card p {
+      color: #6c757d;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .note {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 16px;
+      border-radius: 4px;
+      margin-top: 16px;
+    }
+
+    .note strong {
+      color: #856404;
+    }
+
+    .note p {
+      color: #856404;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .code-block {
+        font-size: 11px;
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 iLibras Widget</h1>
+    <p class="subtitle">Widget de atendimento embarcável para captura de dados</p>
+
+    <div class="demo-section">
+      <h2>Sobre o Widget</h2>
+      <p>
+        O iLibras Widget é um componente embarcável que permite adicionar um botão flutuante 
+        (similar ao WhatsApp) em qualquer site. Quando ativado, exibe um formulário para 
+        capturar Nome, CPF e Telefone do usuário, redirecionando-o para a plataforma de 
+        atendimento com esses dados.
+      </p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>✨ Fácil Integração</h3>
+          <p>Apenas 2 linhas de código para implementar</p>
+        </div>
+        <div class="feature-card">
+          <h3>🎨 Personalizável</h3>
+          <p>Configure cores, posição e textos</p>
+        </div>
+        <div class="feature-card">
+          <h3>📱 Responsivo</h3>
+          <p>Funciona perfeitamente em mobile e desktop</p>
+        </div>
+        <div class="feature-card">
+          <h3>✅ Validação de Dados</h3>
+          <p>Valida CPF e formata campos automaticamente</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Instalação Básica</h2>
+      <p>Adicione estas linhas antes do fechamento da tag <code>&lt;/body&gt;</code>:</p>
+      
+      <div class="code-block">
+<code><span class="comment">&lt;!-- iLibras Widget --&gt;</span>
+<span class="highlight">&lt;link</span> rel=<span class="string">"stylesheet"</span> href=<span class="string">"ilibras-widget.css"</span><span class="highlight">&gt;</span>
+<span class="highlight">&lt;script</span> src=<span class="string">"ilibras-widget.js"</span><span class="highlight">&gt;&lt;/script&gt;</span>
+<span class="highlight">&lt;script&gt;</span>
+  <span class="comment">// Inicializa o widget com configuração padrão</span>
+  <span class="highlight">new</span> ILibrasWidget();
+<span class="highlight">&lt;/script&gt;</span></code>
+      </div>
+
+      <div class="note">
+        <strong>💡 Dica:</strong>
+        <p>O widget aparecerá automaticamente no canto inferior direito da página.</p>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Configuração Personalizada</h2>
+      <p>Você pode personalizar o widget passando um objeto de configuração:</p>
+      
+      <div class="code-block">
+<code><span class="highlight">&lt;script&gt;</span>
+  <span class="highlight">new</span> ILibrasWidget({
+    <span class="comment">// Posição do widget</span>
+    <span class="highlight">position:</span> <span class="string">'bottom-right'</span>, <span class="comment">// 'bottom-right', 'bottom-left', 'top-right', 'top-left'</span>
+    
+    <span class="comment">// URL de redirecionamento</span>
+    <span class="highlight">redirectUrl:</span> <span class="string">'https://teste.com.br'</span>,
+    
+    <span class="comment">// Personalização visual</span>
+    <span class="highlight">primaryColor:</span> <span class="string">'#4A90E2'</span>,
+    <span class="highlight">title:</span> <span class="string">'iLibras'</span>,
+    <span class="highlight">message:</span> <span class="string">'Olá! Estamos aqui para ajudar você! 😊'</span>,
+    <span class="highlight">buttonText:</span> <span class="string">'Iniciar atendimento'</span>,
+    
+    <span class="comment">// Z-index do widget</span>
+    <span class="highlight">zIndex:</span> 9999
+  });
+<span class="highlight">&lt;/script&gt;</span></code>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Opções de Configuração</h2>
+      
+      <div class="code-block">
+<code><span class="highlight">position</span>
+  Posição do widget na tela
+  Opções: <span class="string">'bottom-right'</span> | <span class="string">'bottom-left'</span> | <span class="string">'top-right'</span> | <span class="string">'top-left'</span>
+  Padrão: <span class="string">'bottom-right'</span>
+
+<span class="highlight">redirectUrl</span>
+  URL para onde os dados serão enviados
+  Padrão: <span class="string">'https://teste.com.br'</span>
+
+<span class="highlight">primaryColor</span>
+  Cor principal do widget (formato hexadecimal)
+  Padrão: <span class="string">'#4A90E2'</span>
+
+<span class="highlight">title</span>
+  Título exibido no cabeçalho do modal
+  Padrão: <span class="string">'iLibras'</span>
+
+<span class="highlight">message</span>
+  Mensagem de boas-vindas
+  Padrão: <span class="string">'Olá, somos a equipe iLibras e estamos aqui para ajudar você! 😊'</span>
+
+<span class="highlight">buttonText</span>
+  Texto do botão de submissão
+  Padrão: <span class="string">'Iniciar atendimento'</span>
+
+<span class="highlight">zIndex</span>
+  Camada Z do widget
+  Padrão: <span class="highlight">9999</span></code>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Como Funcionam os Dados</h2>
+      <p>
+        Quando o usuário preenche o formulário e clica em "Iniciar atendimento", 
+        ele é redirecionado para a URL configurada com os seguintes parâmetros:
+      </p>
+      
+      <div class="code-block">
+<code><span class="comment">// Exemplo de URL gerada:</span>
+https://teste.com.br?<span class="highlight">nome</span>=<span class="string">João+Silva</span>&<span class="highlight">cpf</span>=<span class="string">12345678900</span>&<span class="highlight">telefone</span>=<span class="string">11999887766</span>&<span class="highlight">origem</span>=<span class="string">meusite.com</span>
+
+<span class="comment">// Parâmetros enviados:</span>
+- <span class="highlight">nome:</span> Nome do usuário
+- <span class="highlight">cpf:</span> CPF sem formatação (apenas números)
+- <span class="highlight">telefone:</span> Telefone sem formatação (apenas números)
+- <span class="highlight">origem:</span> Hostname do site de origem</code>
+      </div>
+
+      <div class="note">
+        <strong>🔒 Segurança:</strong>
+        <p>O CPF é validado antes do envio. Números inválidos são rejeitados automaticamente.</p>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Exemplos de Uso</h2>
+      
+      <h3 style="margin-top: 20px; margin-bottom: 12px; color: #495057;">Exemplo 1: Widget no canto inferior esquerdo</h3>
+      <div class="code-block">
+<code><span class="highlight">new</span> ILibrasWidget({
+  <span class="highlight">position:</span> <span class="string">'bottom-left'</span>
+});</code>
+      </div>
+
+      <h3 style="margin-top: 20px; margin-bottom: 12px; color: #495057;">Exemplo 2: Personalização completa</h3>
+      <div class="code-block">
+<code><span class="highlight">new</span> ILibrasWidget({
+  <span class="highlight">position:</span> <span class="string">'bottom-right'</span>,
+  <span class="highlight">redirectUrl:</span> <span class="string">'https://minhaplataforma.com.br/atendimento'</span>,
+  <span class="highlight">primaryColor:</span> <span class="string">'#0066CC'</span>,
+  <span class="highlight">title:</span> <span class="string">'Suporte Online'</span>,
+  <span class="highlight">message:</span> <span class="string">'Precisa de ajuda? Informe seus dados para iniciar o atendimento.'</span>,
+  <span class="highlight">buttonText:</span> <span class="string">'Solicitar Atendimento'</span>
+});</code>
+      </div>
+
+      <h3 style="margin-top: 20px; margin-bottom: 12px; color: #495057;">Exemplo 3: Configuração global (auto-inicialização)</h3>
+      <div class="code-block">
+<code><span class="comment">&lt;!-- Defina a configuração antes de carregar o script --&gt;</span>
+<span class="highlight">&lt;script&gt;</span>
+  <span class="highlight">window.iLibrasWidgetConfig</span> = {
+    <span class="highlight">position:</span> <span class="string">'bottom-right'</span>,
+    <span class="highlight">redirectUrl:</span> <span class="string">'https://teste.com.br'</span>
+  };
+<span class="highlight">&lt;/script&gt;</span>
+<span class="highlight">&lt;script</span> src=<span class="string">"ilibras-widget.js"</span><span class="highlight">&gt;&lt;/script&gt;</span>
+<span class="comment">&lt;!-- Widget será inicializado automaticamente --&gt;</span></code>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Métodos Programáticos</h2>
+      <p>Você pode controlar o widget via JavaScript:</p>
+      
+      <div class="code-block">
+<code><span class="comment">// Guarde a instância do widget</span>
+<span class="highlight">const</span> widget = <span class="highlight">new</span> ILibrasWidget();
+
+<span class="comment">// Abrir o widget programaticamente</span>
+widget.openWidget();
+
+<span class="comment">// Fechar o widget programaticamente</span>
+widget.closeWidget();
+
+<span class="comment">// Alternar (abrir/fechar)</span>
+widget.toggleWidget();
+
+<span class="comment">// Remover o widget da página</span>
+widget.destroy();</code>
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Compatibilidade</h2>
+      <p>O widget é compatível com:</p>
+      <ul style="color: #495057; padding-left: 24px; margin-top: 12px; line-height: 1.8;">
+        <li>✅ Todos os navegadores modernos (Chrome, Firefox, Safari, Edge)</li>
+        <li>✅ Dispositivos móveis (iOS e Android)</li>
+        <li>✅ Sites estáticos HTML</li>
+        <li>✅ WordPress, Joomla, Drupal</li>
+        <li>✅ Aplicações React, Vue, Angular</li>
+        <li>✅ Qualquer CMS ou framework web</li>
+      </ul>
+    </div>
+
+    <div class="buttons">
+      <button class="btn btn-primary" onclick="alert('Widget já está ativo nesta página! Clique no botão verde no canto inferior direito.')">
+        Ver Widget em Ação
+      </button>
+      <a href="https://github.com" class="btn btn-secondary" target="_blank">
+        📚 Ver Documentação Completa
+      </a>
+    </div>
+  </div>
+
+  <!-- iLibras Widget - DEMO -->
+  <link rel="stylesheet" href="ilibras-widget.css">
+  <script src="ilibras-widget.js"></script>
+  <script>
+    // Inicializa o widget nesta página de exemplo
+    new ILibrasWidget({
+      position: 'bottom-right',
+      redirectUrl: 'https://teste.com.br',
+      title: 'iLibras',
+      message: 'Olá, somos a equipe iLibras e estamos aqui para ajudar você! 😊'
+    });
+  </script>
+</body>
+</html>
