@@ -8,7 +8,7 @@
     title: 'iLibras',
     message: 'Olá, somos a equipe iLibras e estamos aqui para ajudar você! 😊',
     buttonText: 'Iniciar atendimento em Libras',
-    token: null,
+    token: 'a0673a0159b56e4d1b4156f3d6db5df91773bb136960194db479f0bb3282217b',
     zIndex: 9999
   };
 
@@ -269,17 +269,15 @@
       submitButton.textContent = 'Aguarde...';
 
       try {
+        const formData = new FormData();
+        formData.append('nome', nome);
+        formData.append('cpf', cpf);
+        formData.append('telefone', telefone);
+        formData.append('token', this.config.token);
+
         const response = await fetch('https://sistema.ilibras.com.br/administrativo/api/clientes/cadastrar.php', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            nome: nome,
-            cpf: cpf,
-            telefone: telefone,
-            token: this.config.token
-          })
+          body: formData
         });
 
         if (!response.ok) {
@@ -288,13 +286,18 @@
 
         const result = await response.json();
 
-        if (result.link || result.url || result.redirect) {
-          const redirectUrl = result.link || result.url || result.redirect;
-          window.location.href = redirectUrl;
+        if (result.link_fila || result.link || result.url || result.redirect) {
+          const redirectUrl = result.link_fila || result.link || result.url || result.redirect;
+          window.open(redirectUrl, '_blank');
+          this.closeWidget();
+        } else if (result.status === 'OK' && result.link_fila) {
+          window.open(result.link_fila, '_blank');
+          this.closeWidget();
         } else if (result.success && result.message) {
           alert(result.message);
           if (this.config.redirectUrl) {
-            window.location.href = this.config.redirectUrl;
+            window.open(this.config.redirectUrl, '_blank');
+            this.closeWidget();
           }
         } else {
           throw new Error(result.error || result.message || 'Resposta inesperada da API');
