@@ -145,18 +145,18 @@
       <p>
         <strong>URL:</strong> <code>https://sistema.ilibras.com.br/administrativo/api/clientes/cadastrar.php</code><br>
         <strong>Método:</strong> <code>POST</code><br>
-        <strong>Content-Type:</strong> <code>application/json</code>
+        <strong>Content-Type:</strong> <code>multipart/form-data</code>
       </p>
     </div>
 
     <div class="info-box">
-      <h3>📤 Dados Enviados</h3>
+      <h3>📤 Dados Enviados (FormData)</h3>
       <div class="code-block">
-<code>{
-  <span class="highlight">"cpf"</span>: <span class="string">"12345678900"</span>,
-  <span class="highlight">"nome_usuario"</span>: <span class="string">"João Silva"</span>,
-  <span class="highlight">"nome"</span>: <span class="string">"João Silva"</span>
-}</code>
+<code>FormData:
+  <span class="highlight">nome</span>: <span class="string">"João Silva"</span>
+  <span class="highlight">cpf</span>: <span class="string">"12345678900"</span>
+  <span class="highlight">telefone</span>: <span class="string">"11987654321"</span>
+  <span class="highlight">token</span>: <span class="string">"seu_token_aqui"</span></code>
       </div>
     </div>
 
@@ -164,9 +164,11 @@
       <h3>📥 Resposta Esperada</h3>
       <div class="code-block">
 <code>{
-  <span class="highlight">"link"</span>: <span class="string">"https://ilibras.com/atendimento/12345"</span>,
-  <span class="highlight">"success"</span>: <span class="highlight">true</span>,
-  <span class="highlight">"message"</span>: <span class="string">"Cliente cadastrado com sucesso"</span>
+  <span class="highlight">"status"</span>: <span class="string">"OK"</span>,
+  <span class="highlight">"link_fila"</span>: <span class="string">"https://sistema.ilibras.com.br/acesso.php?token=..."</span>,
+  <span class="highlight">"codigo"</span>: <span class="string">"ABC123"</span>,
+  <span class="highlight">"id_atendimento"</span>: <span class="string">"717"</span>,
+  <span class="highlight">"id_surdo"</span>: <span class="highlight">417</span>
 }</code>
       </div>
     </div>
@@ -176,8 +178,9 @@
       <p>
         • O widget exibirá "Aguarde..." enquanto processa a requisição<br>
         • Em caso de erro, uma mensagem será exibida e o botão será reabilitado<br>
-        • Após sucesso, o usuário será redirecionado automaticamente para o link retornado pela API<br>
-        • A API pode retornar <code>link</code>, <code>url</code> ou <code>redirect</code> - todos são aceitos
+        • Após sucesso, o <code>link_fila</code> será aberto em <strong>nova aba</strong><br>
+        • O modal do widget fecha automaticamente e o usuário permanece na página original<br>
+        • A API pode retornar <code>link_fila</code>, <code>link</code>, <code>url</code> ou <code>redirect</code> (nesta ordem de prioridade)
       </p>
     </div>
 
@@ -185,10 +188,12 @@
       <strong>🎯 Como Testar</strong>
       <p>
         1. Clique no botão azul flutuante no canto inferior direito<br>
-        2. Preencha o formulário com Nome e CPF válido<br>
+        2. Preencha o formulário com Nome, CPF e Telefone válidos<br>
         3. Marque a checkbox de consentimento<br>
         4. Clique em "Iniciar atendimento"<br>
-        5. Aguarde o processamento e redirecionamento
+        5. Aguarde o processamento<br>
+        6. Uma nova aba será aberta automaticamente com o link da fila<br>
+        7. O modal do widget fecha automaticamente e você permanece na página
       </p>
     </div>
   </div>
@@ -203,8 +208,7 @@
       title: 'iLibras API',
       message: 'Preencha seus dados para teste de integração com a API!',
       buttonText: 'Iniciar atendimento',
-      // redirectUrl é usado como fallback caso a API não retorne um link
-      redirectUrl: 'https://ilibras.com'
+      token: 'seu_token_aqui' // ⚠️ Substitua pelo seu token real
     });
   </script>
 </body>

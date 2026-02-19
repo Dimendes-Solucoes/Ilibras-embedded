@@ -17,13 +17,23 @@ Cole este código antes da tag `</body>`:
 <link rel="stylesheet" href="ilibras-widget.css">
 <script src="ilibras-widget.js"></script>
 <script>
-  new ILibrasWidget();
+  new ILibrasWidget({
+    token: 'seu_token_aqui'  // ⚠️ Obrigatório - solicite com a equipe iLibras
+  });
 </script>
 ```
+
+> ⚠️ **IMPORTANTE:** O parâmetro `token` é **obrigatório**. Entre em contato com a equipe iLibras para obter seu token de autenticação.
 
 ### 3️⃣ Pronto! ✅
 
 O widget já está funcionando no canto inferior direito da sua página.
+
+**Comportamento após envio:**
+- ✅ Dados enviados para API
+- 🪟 Abre link de atendimento em **nova aba**
+- ❌ Modal fecha automaticamente
+- 📍 Usuário permanece na página atual
 
 ---
 
@@ -33,15 +43,8 @@ O widget já está funcionando no canto inferior direito da sua página.
 
 ```javascript
 new ILibrasWidget({
+  token: 'seu_token_aqui',
   position: 'bottom-left'  // ou 'top-right', 'top-left'
-});
-```
-
-### Mudar a URL de Destino
-
-```javascript
-new ILibrasWidget({
-  redirectUrl: 'https://meusite.com.br/atendimento'
 });
 ```
 
@@ -49,6 +52,7 @@ new ILibrasWidget({
 
 ```javascript
 new ILibrasWidget({
+  token: 'seu_token_aqui',
   primaryColor: '#0066CC'  // Qualquer cor em hexadecimal
 });
 ```
@@ -57,6 +61,7 @@ new ILibrasWidget({
 
 ```javascript
 new ILibrasWidget({
+  token: 'seu_token_aqui',
   title: 'Minha Empresa',
   message: 'Olá! Precisa de ajuda?',
   buttonText: 'Iniciar Conversa'
@@ -67,14 +72,16 @@ new ILibrasWidget({
 
 ```javascript
 new ILibrasWidget({
+  token: 'abc123xyz789...',  // Token fornecido pela equipe iLibras
   position: 'bottom-right',
-  redirectUrl: 'https://minhaplataforma.com/chat',
   primaryColor: '#FF5722',
   title: 'Suporte 24h',
   message: 'Nossa equipe está pronta para ajudar você!',
   buttonText: 'Falar com Atendente'
 });
 ```
+
+> 📖 **Nota:** O parâmetro `redirectUrl` foi removido. O widget agora abre automaticamente o link da API em nova aba.
 
 ---
 

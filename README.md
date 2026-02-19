@@ -101,25 +101,23 @@ Quando o usuário submete o formulário, os dados são enviados via **POST** (m�
 
 ```
 POST https://sistema.ilibras.com.br/administrativo/api/clientes/cadastrar.php
-Content-Type: application/json
+Content-Type: multipart/form-data
 ```
 
 ### Dados Enviados
 
-```json
-{
-  "nome": "João Silva",
-  "nome_usuario": "João Silva",
-  "cpf": "12345678900",
-  "telefone": "11987654321",
-  "token": "seu_token_de_autenticacao"
-}
+Os dados são enviados como **FormData** (similar a um formulário HTML tradicional):
+
+```
+nome: "João Silva"
+cpf: "12345678900"
+telefone: "11987654321"
+token: "seu_token_de_autenticacao"
 ```
 
 | Campo | Descrição | Formato |
 |-------|-----------|------|
 | `nome` | Nome completo do usuário | String |
-| `nome_usuario` | Nome de usuário (mesmo que o nome) | String |
 | `cpf` | CPF sem formatação (apenas números) | String numérica (11 dígitos) |
 | `telefone` | Telefone sem formatação (apenas números) | String numérica (10-11 dígitos) |
 | `token` | Token de autenticação fornecido pela equipe | String |
@@ -130,18 +128,26 @@ A API deve retornar um JSON com um link de redirecionamento:
 
 ```json
 {
-  "link": "https://ilibras.com/atendimento/12345",
-  "success": true,
-  "message": "Cliente cadastrado com sucesso"
+  "status": "OK",
+  "link_fila": "https://sistema.ilibras.com.br/acesso.php?token=eyJp...",
+  "codigo": "4c6779a0aadb331ff53047879447809812fc9d5778254525d66466339135da5b",
+  "id_atendimento": "717",
+  "id_surdo": 417
 }
 ```
 
 Campos aceitos para redirecionamento (em ordem de prioridade):
+- `link_fila` ⭐ **Recomendado**
 - `link`
 - `url`
 - `redirect`
 
-Após receber a resposta, o widget automaticamente redireciona o usuário para o link fornecido pela API.
+**Comportamento após envio:**
+1. ✅ O widget valida e envia os dados
+2. ✅ A API processa e retorna o link de atendimento
+3. ✅ O link abre em **nova aba** do navegador
+4. ✅ O modal do widget fecha automaticamente
+5. ✅ Usuário permanece na página original enquanto o atendimento abre em outra aba
 
 ## 🎯 Exemplos de Uso
 
