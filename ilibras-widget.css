@@ -38,33 +38,39 @@
   left: 30px;
 }
 
-/* Botão flutuante */
+/* Botão flutuante (apenas ícone) */
 .ilibras-widget-button {
   position: relative;
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
-  border-radius: 50%;
-  display: flex;
+  /* ajustar ao tamanho do próprio ícone */
+  width: auto;
+  height: auto;
+  background: transparent; /* sem cor de fundo */
+  border-radius: 0;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(74, 144, 226, 0.3), 0 3px 8px rgba(74, 144, 226, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: none;
+  transition: none;
+  padding: 0;
   z-index: 10001;
 }
 
-.ilibras-widget-button:hover {
-  transform: scale(1.08);
-  box-shadow: 0 8px 24px rgba(74, 144, 226, 0.4), 0 4px 12px rgba(74, 144, 226, 0.25);
+/* garante que a imagem tenha tamanho fixo
+   (aumente esses valores para deixar o ícone maior; por exemplo 48px ou 64px) */
+.ilibras-widget-button img {
+  width: 64px;
+  height: 64px;
 }
 
+.ilibras-widget-button:hover,
 .ilibras-widget-button:active {
-  transform: scale(1.02);
+  transform: none;
+  box-shadow: none;
 }
 
 .ilibras-widget-button svg {
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  filter: none;
 }
 
 /* Badge de notificação */
