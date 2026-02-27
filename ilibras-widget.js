@@ -57,7 +57,7 @@ createWidget() {
         </div>
 
         <div id="ilibras-widget-modal" class="ilibras-widget-modal">
-          <div class="ilibras-widget-header" style="background-color: ${this.config.primaryColor}">
+          <div class="ilibras-widget-header">
             <div class="ilibras-widget-header-content">
               <div class="ilibras-widget-logo">
                 <img src="ilibras-LOGO.svg" width="40" height="40" alt="iLibras logo">
@@ -99,7 +99,7 @@ createWidget() {
                 </label>
               </div>
 
-              <button type="submit" class="ilibras-widget-submit" style="background-color: ${this.config.primaryColor}">
+              <button type="submit" class="ilibras-widget-submit">
                 ${this.config.buttonText}
               </button>
             </form>
