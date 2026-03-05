@@ -15,7 +15,6 @@
 #ilibras-widget-container {
   position: fixed;
   z-index: 9999;
-  color: #0096BE; /* texto padrão em azul claro */
 }
 
 /* Posicionamento */
@@ -107,9 +106,9 @@
   width: clamp(320px, 26vw, 480px);
   max-width: calc(100vw - 40px);
   background: white;
-  border: 1px solid rgba(25, 40, 70, 0.12);
+  border: 1px solid rgba(53, 122, 189, 0.08);
   border-radius: 8px; /* mais achatado */
-  box-shadow: 0 6px 18px rgba(25, 40, 70, 0.06);
+  box-shadow: 0 6px 18px rgba(20, 30, 45, 0.06);
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px) scale(0.995);
@@ -145,17 +144,15 @@
   left: 0;
 }
 
-/* Header do modal */
 .ilibras-widget-header {
-  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
-  padding: 28px 30px;
+  background: white;
+  padding: 14px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: white;
-  /* remove border accents from recent styles */
-  border-left: none;
-  border-bottom: none;
+  color: #357ABD;
+  border-left: 2px solid rgba(53,122,189,0.08);
+  border-bottom: 2px solid rgba(53,122,189,0.06);
 }
 
 .ilibras-widget-header-content {
@@ -166,7 +163,7 @@
 }
 
 .ilibras-widget-logo {
-  display: none !important; /* Removida do header conforme solicitado */
+  display: none !important;
 }
 
 .ilibras-widget-title {
@@ -174,7 +171,7 @@
   font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.2px;
-  color: #1f4f7a; /* tom mais escuro para melhor leitura */
+  color: #1f4f7a;
 }
 
 .ilibras-widget-close {
@@ -193,29 +190,28 @@
 }
 
 .ilibras-widget-close:hover {
-background: rgba(216,165,0,0.12); /* hover dourado */
+  background: rgba(53,122,189,0.08);
   transform: translateY(-1px);
 }
- 
- .ilibras-widget-close:active {
-  background: rgba(216,165,0,0.18);
+
+.ilibras-widget-close:active {
+  background: rgba(53,122,189,0.12);
 }
 
 /* Body do modal */
 .ilibras-widget-body {
   padding: 20px !important;
   background: white; /* fundo branco do widget */
-  color: inherit; /* herda azul claro */
 }
 
 .ilibras-widget-message {
-  background: rgba(220,165,0,0.06); /* leve tom dourado */
+  background: rgba(74,144,226,0.06); /* leve tom da cor da logo */
   border-radius: 14px; 
-  border: 1px solid rgba(220,165,0,0.18);
+  border: 1px solid rgba(74,144,226,0.08);
   font-size: 15px;
   margin-bottom: 18px !important;
   padding: 12px 14px;
-  color: #192846;
+  color: #073657;
 }
 
 /* Formulário */
@@ -250,8 +246,8 @@ background: rgba(216,165,0,0.12); /* hover dourado */
 .ilibras-widget-form-group input[type="text"]:focus,
 .ilibras-widget-form-group input[type="tel"]:focus {
   background: white;
-  border-color: #0096BE;
-  box-shadow: 0 6px 18px rgba(0,150,190,0.12);
+  border-color: #357ABD;
+  box-shadow: 0 6px 18px rgba(53,122,189,0.08);
   outline: none;
 }
 
@@ -278,7 +274,7 @@ background: rgba(216,165,0,0.12); /* hover dourado */
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: #0096BE;
+  accent-color: #357ABD;
 }
 
 .ilibras-widget-checkbox-label span {
@@ -288,11 +284,11 @@ background: rgba(216,165,0,0.12); /* hover dourado */
 /* Botão de submit */
 
 .ilibras-widget-submit {
-  padding: 16px !important; /* restore slightly larger padding */
-  border-radius: 14px;
+  padding: 12px 14px !important;
+  border-radius: 10px;
   font-size: 15px;
-  text-transform: none; /* Evite gritar com o usuário */
-  letter-spacing: 0.5px;
+  text-transform: none;
+  letter-spacing: 0.3px;
   background: linear-gradient(90deg,#4A90E2,#357ABD);
   color: #fff;
   border: none;
@@ -302,12 +298,12 @@ background: rgba(216,165,0,0.12); /* hover dourado */
 
 .ilibras-widget-submit:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(0,150,190,0.18);
+  box-shadow: 0 8px 22px rgba(53,122,189,0.18);
 }
 
 .ilibras-widget-submit:active {
   transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(0,150,190,0.12);
+  box-shadow: 0 4px 10px rgba(53,122,189,0.12);
 }
 
 .ilibras-widget-submit:disabled {
@@ -359,18 +355,16 @@ background: rgba(216,165,0,0.12); /* hover dourado */
   }
 }
 
-/* Ajustes para telas muito grandes */
 @media (min-width: 1600px) {
   .ilibras-widget-modal {
     width: clamp(360px, 20vw, 560px);
   }
 }
 
-/* Melhor contraste para focus (acento da logo) */
 .ilibras-widget-button:focus-visible,
 .ilibras-widget-close:focus-visible,
 .ilibras-widget-submit:focus-visible {
-  outline: 3px solid rgba(0,150,190,0.18);
+  outline: 3px solid rgba(53,122,189,0.18);
   outline-offset: 3px;
 }
 
@@ -403,7 +397,7 @@ background: rgba(216,165,0,0.12); /* hover dourado */
 .ilibras-widget-button:focus-visible,
 .ilibras-widget-close:focus-visible,
 .ilibras-widget-submit:focus-visible {
-  outline: 3px solid #0096BE;
+  outline: 3px solid #4A90E2;
   outline-offset: 2px;
 }
 
