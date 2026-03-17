@@ -45,7 +45,7 @@
       return 'ilibras-widget.css';
     }
 
-    createWidget() {
+createWidget() {
       const container = document.createElement('div');
       container.id = 'ilibras-widget-container';
       container.className = `ilibras-widget-${this.config.position}`;
@@ -53,20 +53,14 @@
       
       container.innerHTML = `
         <div id="ilibras-widget-button" class="ilibras-widget-button">
-          <svg viewBox="0 0 64 64" width="36" height="36" fill="white">
-            <path d="M32 8c-2.2 0-4 1.8-4 4v12c0 2.2 1.8 4 4 4s4-1.8 4-4V12c0-2.2-1.8-4-4-4zm-12 4c-2.2 0-4 1.8-4 4v8c0 2.2 1.8 4 4 4s4-1.8 4-4v-8c0-2.2-1.8-4-4-4zm24 0c-2.2 0-4 1.8-4 4v8c0 2.2 1.8 4 4 4s4-1.8 4-4v-8c0-2.2-1.8-4-4-4zM8 20c-2.2 0-4 1.8-4 4v4c0 2.2 1.8 4 4 4s4-1.8 4-4v-4c0-2.2-1.8-4-4-4zm48 0c-2.2 0-4 1.8-4 4v4c0 2.2 1.8 4 4 4s4-1.8 4-4v-4c0-2.2-1.8-4-4-4zM20 28v0c0 2.2-1.8 4-4 4v4c0 8.8 7.2 16 16 16s16-7.2 16-16v-4c-2.2 0-4-1.8-4-4v0"/>
-            <circle cx="32" cy="54" r="3" fill="white"/>
-          </svg>
+          <img src="ilibras-LOGO.svg" width="32" height="32" alt="iLibras logo">
         </div>
 
         <div id="ilibras-widget-modal" class="ilibras-widget-modal">
-          <div class="ilibras-widget-header" style="background-color: ${this.config.primaryColor}">
+          <div class="ilibras-widget-header">
             <div class="ilibras-widget-header-content">
               <div class="ilibras-widget-logo">
-                <svg viewBox="0 0 64 64" width="44" height="44" fill="white">
-                  <path d="M32 8c-2.2 0-4 1.8-4 4v12c0 2.2 1.8 4 4 4s4-1.8 4-4V12c0-2.2-1.8-4-4-4zm-12 4c-2.2 0-4 1.8-4 4v8c0 2.2 1.8 4 4 4s4-1.8 4-4v-8c0-2.2-1.8-4-4-4zm24 0c-2.2 0-4 1.8-4 4v8c0 2.2 1.8 4 4 4s4-1.8 4-4v-8c0-2.2-1.8-4-4-4zM8 20c-2.2 0-4 1.8-4 4v4c0 2.2 1.8 4 4 4s4-1.8 4-4v-4c0-2.2-1.8-4-4-4zm48 0c-2.2 0-4 1.8-4 4v4c0 2.2 1.8 4 4 4s4-1.8 4-4v-4c0-2.2-1.8-4-4-4zM20 28v0c0 2.2-1.8 4-4 4v4c0 8.8 7.2 16 16 16s16-7.2 16-16v-4c-2.2 0-4-1.8-4-4v0"/>
-                  <circle cx="32" cy="54" r="3" fill="white"/>
-                </svg>
+                <img src="ilibras-LOGO.svg" width="40" height="40" alt="iLibras logo">
               </div>
               <div class="ilibras-widget-title">${this.config.title}</div>
             </div>
@@ -85,59 +79,27 @@
             <form id="ilibras-widget-form" class="ilibras-widget-form">
               <div class="ilibras-widget-form-group">
                 <label for="ilibras-name">Nome*</label>
-                <input 
-                  type="text" 
-                  id="ilibras-name" 
-                  name="name" 
-                  placeholder="Digite seu nome"
-                  required
-                  autocomplete="name"
-                />
+                <input type="text" id="ilibras-name" name="name" placeholder="Digite seu nome" required autocomplete="name" />
               </div>
 
               <div class="ilibras-widget-form-group">
                 <label for="ilibras-cpf">CPF*</label>
-                <input 
-                  type="text" 
-                  id="ilibras-cpf" 
-                  name="cpf" 
-                  placeholder="000.000.000-00" 
-                  required
-                  maxlength="14"
-                  autocomplete="off"
-                />
+                <input type="text" id="ilibras-cpf" name="cpf" placeholder="000.000.000-00" required maxlength="14" autocomplete="off" />
               </div>
 
               <div class="ilibras-widget-form-group">
                 <label for="ilibras-phone">Telefone*</label>
-                <input 
-                  type="text" 
-                  id="ilibras-phone" 
-                  name="phone" 
-                  placeholder="(00) 00000-0000" 
-                  required
-                  maxlength="15"
-                  autocomplete="tel"
-                />
+                <input type="text" id="ilibras-phone" name="phone" placeholder="(00) 00000-0000" required maxlength="15" autocomplete="tel" />
               </div>
 
               <div class="ilibras-widget-form-group">
                 <label for="ilibras-consent" class="ilibras-widget-checkbox-label">
-                  <input 
-                    type="checkbox" 
-                    id="ilibras-consent" 
-                    name="consent" 
-                    required
-                  />
+                  <input type="checkbox" id="ilibras-consent" name="consent" required />
                   <span>Aceito ser redirecionado para atendimento em Libras</span>
                 </label>
               </div>
 
-              <button 
-                type="submit" 
-                class="ilibras-widget-submit"
-                style="background-color: ${this.config.primaryColor}"
-              >
+              <button type="submit" class="ilibras-widget-submit">
                 ${this.config.buttonText}
               </button>
             </form>
